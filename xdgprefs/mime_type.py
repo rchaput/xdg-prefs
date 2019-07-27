@@ -58,12 +58,18 @@ class MimeType(object):
 
 
 class MimeTypeParser:
+    """
+    Helper class to parse the XML files describing media types.
+
+    https://specifications.freedesktop.org/shared-mime-info-spec/shared-mime-info-spec-0.11.html
+    """
 
     logger = logging.getLogger('MimeTypeParser')
     xmlns = '{http://www.freedesktop.org/standards/shared-mime-info}'
 
     @classmethod
     def parse(cls, filepath):
+        """Parse an XML file and return the corresponding MimeType."""
         tree = ElementTree.parse(filepath)
         # The root element represents a Mime Type
         root = tree.getroot()
@@ -78,6 +84,7 @@ class MimeTypeParser:
 
     @classmethod
     def _check_tag(cls, filepath, root):
+        """Check if the root element has the correct tag."""
         correct = f'{cls.xmlns}mime-type'
         if root.tag != correct:
             cls.logger.warning(f'The root element of {filepath} is '
@@ -88,6 +95,7 @@ class MimeTypeParser:
 
     @classmethod
     def _check_attrib(cls, filepath, root):
+        """Check if the root element has the correct attributes."""
         if 'type' not in root.attrib:
             cls.logger.warning(f'The root element of {filepath} does not '
                                f'have a type attribute! Ignoring this file.')
@@ -96,24 +104,26 @@ class MimeTypeParser:
 
     @classmethod
     def _get_type_subtype(cls, root):
+        """Return the type and subtype from the root element."""
         identifier = root.attrib['type']
         _type, subtype = identifier.split('/')
         return _type, subtype
 
     @classmethod
     def _get_comment(cls, root):
+        """Return the comment describing the media type."""
         comments = root.findall(f'{cls.xmlns}comment')
         os_lang = os_env.get_language()
         # TODO: pick the comment matching the OS lang instead of the default
         for comment in comments:
-            comment_lang = comment.attrib['lang'] \
-                if 'lang' in comment.attrib else ''
+            comment_lang = comment.attrib.get('lang', default='')
             if comment_lang == '':
                 return comment.text
         return ''
 
     @classmethod
     def _get_extensions(cls, root):
+        """Return all glob extensions associated to the media type."""
         extensions = []
         for glob in root.findall(f'{cls.xmlns}glob'):
             if 'pattern' in glob.attrib:
