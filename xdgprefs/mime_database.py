@@ -36,6 +36,11 @@ def mime_dirs(only_existing=True):
 
 
 class MimeDatabase(object):
+    """
+    This class finds and holds all Media Types registered on the computer.
+
+    It is used to build the database in a first step, and then query it.
+    """
 
     logger: logging.Logger
     types: Dict[str, MimeType]
@@ -47,11 +52,12 @@ class MimeDatabase(object):
         self._build_db()
 
     def _build_db(self):
+        """Build the database, searching in the <MIME> directories."""
         self.logger.debug('Building the Mime Database...')
         # First, loop on all <MIME> directories.
         for mime_dir in mime_dirs():
             self.logger.debug(f'Looking in {mime_dir}...')
-            # First, loop on the <MEDIA> subdirectories.
+            # Next, loop on the <MEDIA> subdirectories.
             # Ignore the `packages` subdirectory (not a MEDIA).
             subdirs = [f.path for f in os.scandir(mime_dir) if f.is_dir()
                        and f.name != 'packages']
@@ -72,6 +78,7 @@ class MimeDatabase(object):
         self.types[mimetype.identifier] = mimetype
 
     def get_type(self, identifier):
+        """Return the MimeType associated to an identifier."""
         if identifier in self.types:
             return self.types[identifier]
         else:
