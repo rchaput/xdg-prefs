@@ -8,7 +8,7 @@ import logging
 from typing import List
 from xml.etree import ElementTree
 
-from xdgprefs import os_env
+from xdgprefs.core import os_env
 
 
 class MimeType(object):
@@ -116,7 +116,7 @@ class MimeTypeParser:
         os_lang = os_env.get_language()
         # TODO: pick the comment matching the OS lang instead of the default
         for comment in comments:
-            comment_lang = comment.attrib.get('lang', default='')
+            comment_lang = comment.attrib.get('lang', '')
             if comment_lang == '':
                 return comment.text
         return ''

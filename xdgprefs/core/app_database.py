@@ -8,9 +8,9 @@ import os
 import logging
 from typing import Dict
 
-from xdgprefs.os_env import xdg_data_dirs
-from xdgprefs.desktop_entry import DesktopEntry
-from xdgprefs import desktop_entry_parser as parser
+from xdgprefs.core.os_env import xdg_data_dirs
+from xdgprefs.core.desktop_entry import DesktopEntry
+from xdgprefs.core import desktop_entry_parser as parser
 
 
 def app_dirs(only_existing=True):

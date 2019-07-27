@@ -8,7 +8,7 @@ import re
 from collections import OrderedDict
 import logging
 
-from xdgprefs.desktop_entry import DesktopEntry, EntryGroup, Entry
+from xdgprefs.core.desktop_entry import DesktopEntry, EntryGroup, Entry
 
 
 logger = logging.getLogger('DesktopEntryParser')

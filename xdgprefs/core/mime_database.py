@@ -10,8 +10,8 @@ import os
 import logging
 from typing import Dict
 
-from xdgprefs.os_env import xdg_data_dirs, xdg_data_home
-from xdgprefs.mime_type import MimeType, MimeTypeParser
+from xdgprefs.core.os_env import xdg_data_dirs, xdg_data_home
+from xdgprefs.core.mime_type import MimeType, MimeTypeParser
 
 
 def mime_dirs(only_existing=True):
