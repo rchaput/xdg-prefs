@@ -17,6 +17,7 @@ def _find_xdg_mime():
     # Try to find the `xdg-mime` executable using `which`.
     path = _try_which()
     if path is not None:
+        logger.info(f'xdg-mime found at {path}')
         # Check if the executable works.
         ret = _try_path(path)
         if not ret:
@@ -58,6 +59,16 @@ bin_path = _find_xdg_mime()
 
 
 def get_default_app(mime_type):
+    """
+    Get the application that is registered as 'default' to open the
+    specified MIME Type.
+
+    :param mime_type: The identifier of the MIME Type, e.g. 'image/jpeg'.
+    :type mime_type: str
+
+    :return: The identifier of the desktop application, e.g. 'gimp.desktop'.
+    :rtype: str
+    """
     if bin_path is None:
         logger.error('Can\'t get the default app if xdg-mime was not found!')
         return None
@@ -72,6 +83,19 @@ def get_default_app(mime_type):
 
 
 def set_default_app(mime_type, app):
+    """
+    Set the default application to open the specified MIME Type.
+
+    :param mime_type: The identifier of the MIME Type, e.g. 'image/jpeg'.
+    :type mime_type: str
+
+    :param app: The identifier of the desktop application, e.g. 'gimp.desktop'.
+    :type: str
+
+    :return: True if the application was correctly registered as the
+    default one (according to the xdg-mime backend, i.e. if the return code
+    was 0), False otherwise.
+    """
     if bin_path is None:
         logger.error('Can\t set the default app if xdg-mime was not found!')
         return False
