@@ -5,7 +5,7 @@ to parse media types from their XML files).
 
 
 import logging
-from typing import List
+from typing import List, Optional
 from xml.etree import ElementTree
 
 from xdgprefs.core import os_env
@@ -25,12 +25,14 @@ class MimeType(object):
                  _type: str,
                  subtype: str,
                  comment: str,
-                 extensions: List[str]):
+                 extensions: List[str],
+                 icon: Optional[str]):
         # Data
         self.type = _type
         self.subtype = subtype
         self.comment = comment
         self.extensions = extensions
+        self.icon = icon
 
         # Computed data
         self.identifier = '{}/{}'.format(self.type, self.subtype)
@@ -80,7 +82,8 @@ class MimeTypeParser:
         _type, subtype = cls._get_type_subtype(root)
         comment = cls._get_comment(root)
         extensions = cls._get_extensions(root)
-        return MimeType(_type, subtype, comment, extensions)
+        icon = cls._get_icon(root)
+        return MimeType(_type, subtype, comment, extensions, icon)
 
     @classmethod
     def _check_tag(cls, filepath, root):
@@ -129,3 +132,11 @@ class MimeTypeParser:
             if 'pattern' in glob.attrib:
                 extensions.append(glob.attrib['pattern'])
         return extensions
+
+    @classmethod
+    def _get_icon(cls, root):
+        """Return the name of the icon associated to the media type."""
+        elem = root.find(f'{cls.xmlns}generic-icon')
+        if elem is not None:
+            return elem.attrib.get('name', None)
+        return None
