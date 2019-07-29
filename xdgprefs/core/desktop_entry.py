@@ -61,14 +61,15 @@ class DesktopEntry(object):
     Entry Groups. The default one is named 'Desktop Entry'.
     """
 
+    logger = logging.getLogger('DesktopEntry')
+
     def __init__(self, groups, appid):
         self.groups = groups
         self.appid = appid
-        self.logger = logging.getLogger('DesktopEntry-' + appid)
 
     def get_entry(self, entry_key, groupname='Desktop Entry'):
         if groupname not in self.groups:
-            self.logger.warning(f'Group name {groupname} not found!')
+            self.logger.warning(f'[{self.appid}] Group {groupname} not found!')
             return None
         group = self.groups[groupname]
         return group.get_entry(entry_key)
@@ -84,6 +85,10 @@ class DesktopEntry(object):
     @property
     def generic_name(self):
         return self.get_entry_value('GenericName')
+
+    @property
+    def comment(self):
+        return self.get_entry_value('Comment')
 
     @property
     def icon(self):
