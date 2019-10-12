@@ -3,7 +3,7 @@ This module allows access to various environment variables of the Operating
 System, such as XDG configuration values, the current Desktop Environment,
 or the language.
 
-XDG values (data directory, configuration directory, ...):
+XDG BaseDir specification:
 https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 """
 
@@ -60,12 +60,15 @@ def xdg_runtime_dir():
 
 def get_current_desktop_environment():
     """
-    Returns an identifier of the current Desktop Environment, such as
-    `gnome`, `kde` or `i3`.
+    Returns the list of identifier (lowercase) that the current Desktop
+    Environment is known as (e.g. 'gnome', 'kde', 'i3').
 
-    :rtype: str
+    :rtype: list
     """
-    return os.getenv('XDG_CURRENT_DESKTOP')
+    desktop = os.getenv('XDG_CURRENT_DESKTOP') or ''
+    desktop = desktop.split(',')
+    desktop = [name.lower() for name in desktop]
+    return desktop
 
 
 def get_language():
