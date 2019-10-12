@@ -56,6 +56,7 @@ def _try_path(path):
 
 
 bin_path = _find_xdg_mime()
+logger.debug(f'Found xdg-mime: {bin_path}')
 
 
 def get_default_app(mime_type):
@@ -97,12 +98,12 @@ def set_default_app(mime_type, app):
     was 0), False otherwise.
     """
     if bin_path is None:
-        logger.error('Can\t set the default app if xdg-mime was not found!')
+        logger.critical('Can\t set the default app if xdg-mime was not found!')
         return False
     res = subprocess.run([bin_path, 'default', app, mime_type],
                          capture_output=True,
                          text=True)
     if res.returncode is not 0:
-        logger.warning(f'Unknown error while setting default application'
-                       f' ({res.returncode}): {res.stderr}')
+        logger.error(f'Unknown error while setting default application'
+                     f' ({res.returncode}): {res.stderr}')
     return res.returncode is 0
