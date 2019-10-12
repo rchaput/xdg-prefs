@@ -109,3 +109,11 @@ class DesktopEntry(object):
     @property
     def mime_type(self):
         return self.get_entry_value('MimeType')
+
+    @property
+    def is_vendor(self):
+        return self.appid.startswith('vnd-')
+
+    @property
+    def is_extension(self):
+        return self.appid.startswith('x-')
