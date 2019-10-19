@@ -9,12 +9,17 @@ https://specifications.freedesktop.org/mime-apps-spec/latest/index.html
 """
 
 
+import configparser
 import logging
 import os
 from collections import defaultdict
-from enum import Enum, auto
 
 from xdgprefs.core import os_env
+
+
+ADDED = 'Added Applications'
+REMOVED = 'Removed Applications'
+DEFAULT = 'Default Applications'
 
 
 class Associations(object):
@@ -24,11 +29,20 @@ class Associations(object):
         self.removed = []
         self.default = []
 
+    def extend_added(self, apps):
+        for app in apps:
+            if app not in self.added and app not in self.removed:
+                self.added.append(app)
 
-class Section(Enum):
-    ADDED = auto()
-    REMOVED = auto()
-    DEFAULT = auto()
+    def extend_removed(self, apps):
+        for app in apps:
+            if app not in self.removed:
+                self.removed.append(app)
+
+    def extend_default(self, apps):
+        for app in apps:
+            if app not in self.default:
+                self.default.append(app)
 
 
 def mimeapps_files(only_existing=True):
@@ -88,22 +102,31 @@ def cache_files(only_existing=True):
     return files
 
 
-def extend_blacklist(list1, list2, blacklist):
-    """
-    Extend a list with the contents of another list, except for those
-    in the blacklist.
-    """
-    for elt in list2:
-        if elt not in blacklist:
-            list1.append(elt)
+class ArrayInterpolation(configparser.Interpolation):
+
+    def before_read(self, parser, section, option, value):
+        values = value.split(';')
+        # if the line is 'd1;d2;', the last element is empty, let's remove it
+        if values[-1].strip() == '':
+            values.pop(-1)
+        return values
+
+    def before_write(self, parser, section, option, value):
+        return ';'.join(value) + ';'
 
 
-def extend_unique(list1, list2):
-    """
-    Extend a list with the elements of another list which are not
-    already in the first list.
-    """
-    extend_blacklist(list1, list2, list1)
+def parse_mimeapps(file_path):
+    config = configparser.ConfigParser(delimiters='=',
+                                       interpolation=ArrayInterpolation())
+    try:
+        config.read(file_path)
+        for section in [ADDED, REMOVED, DEFAULT]:
+            if section not in config.sections():
+                config[section] = {}
+        return config
+    except configparser.Error as e:
+        print(e)
+        return None
 
 
 class AssociationsDatabase(object):
@@ -111,6 +134,8 @@ class AssociationsDatabase(object):
     def __init__(self):
         self.logger = logging.getLogger('AssociationsDatabase')
         self.associations = defaultdict(Associations)
+        self.config_path = os.path.join(os_env.xdg_config_home(), 'mimeapps.list')
+        self.config = parse_mimeapps(self.config_path)
 
         self._build_db()
 
@@ -123,48 +148,25 @@ class AssociationsDatabase(object):
             self._parse_cache_file(file)
 
     def _parse_mimeapps_file(self, path):
-        with open(path, 'r') as f:
-            section = None
-            for line in f.readlines():
-                line = line.strip()
-                if line == '':
-                    continue
-                if line == '[Added Associations]':
-                    section = Section.ADDED
-                elif line == '[Removed Associations]':
-                    section = Section.REMOVED
-                elif line == '[Default Applications]':
-                    section = Section.DEFAULT
-                else:
-                    mimetype, apps = self._parse_line(line)
-                    assoc = self.associations[mimetype]
-                    if section is Section.ADDED:
-                        extend_blacklist(assoc.added, apps, assoc.removed)
-                        # for app in apps:
-                        #     if app not in assoc.removed:
-                        #         assoc.added.append(app)
-                    elif section is Section.REMOVED:
-                        extend_unique(assoc.removed, apps)
-                    elif section is Section.DEFAULT:
-                        extend_unique(assoc.default, apps)
-                    else:
-                        self.logger.warning(f'Badly formatted file: {path}')
+        config = parse_mimeapps(path)
+        if config is None:
+            self.logger.warning(f'Badly formatted file: {path}')
+            return
+        section = config['Added Applications']
+        for mimetype, apps in section.items():
+            self.associations[mimetype].extend_added(apps)
+        section = config['Removed Applications']
+        for mimetype, apps in section.items():
+            self.associations[mimetype].extend_removed(apps)
+        section = config['Default Applications']
+        for mimetype, apps in section.items():
+            self.associations[mimetype].extend_default(apps)
 
     def _parse_cache_file(self, path):
-        with open(path, 'r') as f:
-            for line in f.readlines():
-                line = line.strip()
-                if '=' in line:
-                    mimetype, apps = self._parse_line(line)
-                    assoc = self.associations[mimetype]
-                    assoc.default.extend(apps)
-
-    def _parse_line(self, line):
-        mimetype, apps = line.split('=')
-        apps = apps.split(';')
-        if apps[-1] == '':
-            apps.remove('')
-        return mimetype, apps
+        config = parse_mimeapps(path)
+        for mimetype, apps in config['MIME Cache'].items():
+            assoc = self.associations[mimetype]
+            assoc.extend_default(apps)
 
     def get_apps_for_mimetype(self, mimetype):
         if mimetype in self.associations:
@@ -174,6 +176,22 @@ class AssociationsDatabase(object):
 
     def get_mimetypes_for_app(self, app):
         return []
+
+    def set_app_for_mimetype(self, mimetype, app):
+        section = self.config[DEFAULT]
+        apps = section.get(mimetype, fallback=[])
+        if app in apps:
+            apps.remove(app)
+        apps.insert(0, app)
+        return self.save_config()
+
+    def save_config(self):
+        try:
+            with open(self.config_path, 'w') as f:
+                self.config.write(f, space_around_delimiters=False)
+            return True
+        except:
+            return False
 
     @property
     def size(self):

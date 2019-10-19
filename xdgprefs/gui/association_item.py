@@ -8,7 +8,6 @@ from threading import Thread
 from PySide2.QtWidgets import QComboBox
 
 from xdgprefs.gui.mime_item import MimeTypeItem
-from xdgprefs.core.xdg_mime_wrapper import set_default_app
 
 
 class AssociationItem(MimeTypeItem):
@@ -30,7 +29,7 @@ class AssociationItem(MimeTypeItem):
         app = self.selector.currentText()
         self.main_window.status.showMessage(f'Setting {mime} to {app}...')
         def run():
-            success = set_default_app(mime, app)
+            success = self.main_window.assocdb.set_app_for_mimetype(mime, app)
             if success:
                 msg = f'{app} was successfully set to open {mime}.'
             else:
