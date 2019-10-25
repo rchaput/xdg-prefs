@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module defines functions and class to handle the Application Database
 (i.e. the list of Desktop Entries that represent applications).
@@ -6,10 +7,8 @@ This module defines functions and class to handle the Application Database
 
 import os
 import logging
-from typing import Dict
 
 from xdgprefs.core.os_env import xdg_data_dirs
-from xdgprefs.core.desktop_entry import DesktopEntry
 from xdgprefs.core import desktop_entry_parser as parser
 
 
@@ -33,9 +32,6 @@ def app_dirs(only_existing=True):
 
 
 class AppDatabase(object):
-
-    logger: logging.Logger
-    apps: Dict[str, DesktopEntry]
 
     def __init__(self):
         self.logger = logging.getLogger('AppDatabase')

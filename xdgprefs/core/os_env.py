@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module allows access to various environment variables of the Operating
 System, such as XDG configuration values, the current Desktop Environment,

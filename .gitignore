@@ -2,3 +2,6 @@
 .idea
 
 **/.cache
+build/**
+dist/**
+XDG_Prefs.egg-info/**

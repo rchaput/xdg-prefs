@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This modules defines widgets that allow to view the associations between
 MIME Types and Applications as a Qt List, and to modify the associated
@@ -32,7 +33,8 @@ class AssociationsPanel(QWidget):
             mime = self.mimedb.get_type(mime_id)
             if mime is not None:
                 apps = self.assocdb.get_apps_for_mimetype(mime_id)
-                item = AssociationItem(mime, apps, main_window, self.list_widget)
+                item = AssociationItem(mime, apps, main_window,
+                                       self.list_widget)
                 self.item_map[mime] = item
                 self.list_widget.addItem(item)
 
@@ -90,7 +92,8 @@ class AssociationsPanel(QWidget):
         nb_shown = 0
         nb_total = 0
         for mime_type in self.item_map:
-            matches = self.matches(mime_type, filter_text, personal, vendor, ext)
+            matches = self.matches(mime_type, filter_text, personal, vendor,
+                                   ext)
             # If it matches, show it
             self.item_map[mime_type].setHidden(not matches)
             # Count the number of shown apps

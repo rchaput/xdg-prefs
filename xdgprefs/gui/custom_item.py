@@ -1,9 +1,10 @@
+# -*- coding: future_fstrings -*-
 """
 This module defines a custom QListWidgetItem that uses the following layout:
 - icon on the left
 - first line of text, bold
 - second line of text
-- third line of thext, italic
+- third line of text, italic
 This QListWidgetItem is used to show both MimeTypes and App.
 """
 

@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 Desktop file tokenizer and parser.
 Source: https://github.com/wor/desktop_file_parser

@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module defines wrapper functions for the `xdg-mime` software.
 
@@ -40,8 +41,9 @@ def _try_path(path):
     """Try an absolute or relative path for the `xdg-mime` executable."""
     try:
         res = subprocess.run([path, '--version'],
-                             capture_output=True,
-                             text=True)
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE,
+                             universal_newlines=True)
         if res.returncode is not 0:
             logger.warning(f'Unknown error for path {path} ({res.returncode}):'
                            f' {res.stderr}')

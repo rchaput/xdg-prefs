@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module defines the main window, allowing the user to effectively
 use the application.
