@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module defines the database that lists associations between
 MIME Types and Applications (represented by Desktop Entries).
@@ -91,9 +92,9 @@ def cache_files(only_existing=True):
     dirs = [os.path.join(d, 'applications') for d in dirs]
 
     files = []
-    for dir in dirs:
+    for _dir in dirs:
         for prefix in prefixes:
-            file = os.path.join(dir, prefix + 'mimeinfo.cache')
+            file = os.path.join(_dir, prefix + 'mimeinfo.cache')
             files.append(file)
 
     if only_existing:
@@ -134,7 +135,8 @@ class AssociationsDatabase(object):
     def __init__(self):
         self.logger = logging.getLogger('AssociationsDatabase')
         self.associations = defaultdict(Associations)
-        self.config_path = os.path.join(os_env.xdg_config_home(), 'mimeapps.list')
+        self.config_path = os.path.join(os_env.xdg_config_home(),
+                                        'mimeapps.list')
         self.config = parse_mimeapps(self.config_path)
 
         self._build_db()
@@ -172,9 +174,6 @@ class AssociationsDatabase(object):
         if mimetype in self.associations:
             assoc = self.associations[mimetype]
             return assoc.default
-        return []
-
-    def get_mimetypes_for_app(self, app):
         return []
 
     def set_app_for_mimetype(self, mimetype, app):

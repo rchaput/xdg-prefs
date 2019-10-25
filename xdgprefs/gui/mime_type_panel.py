@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module defines Qt Widgets that allow to view the list of MIME Types
 as a Qt List (using a custom widget for the layout).
@@ -83,7 +84,8 @@ class MimeTypePanel(QWidget):
         nb_shown = 0
         nb_total = 0
         for mime_type in self.item_map:
-            matches = self.matches(mime_type, filter_text, personal, vendor, ext)
+            matches = self.matches(mime_type, filter_text, personal, vendor,
+                                   ext)
             # If it matches, show it
             self.item_map[mime_type].setHidden(not matches)
             # Count the number of shown apps

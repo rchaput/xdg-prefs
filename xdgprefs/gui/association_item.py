@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module defines a single AssociationItem in the AssociationsPanel.
 """
@@ -24,7 +25,7 @@ class AssociationItem(MimeTypeItem):
 
         self.hbox.addWidget(self.selector, 2)
 
-    def _on_selected(self, text):
+    def _on_selected(self, _):
         mime = self.mime_type.identifier
         app = self.selector.currentText()
         self.main_window.status.showMessage(f'Setting {mime} to {app}...')

@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module defines code relative to Desktop Entries, i.e. applications
 which are compliant with the XDG specifications.

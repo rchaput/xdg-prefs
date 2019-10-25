@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 This module provides functions and classes used to handle the Mime Database
 (i.e. the set of known MIME Types, with associated meta information).
@@ -41,9 +42,6 @@ class MimeDatabase(object):
 
     It is used to build the database in a first step, and then query it.
     """
-
-    logger: logging.Logger
-    types: Dict[str, MimeType]
 
     def __init__(self):
         self.logger = logging.getLogger('MimeDatabase')
