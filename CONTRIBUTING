@@ -1,0 +1,15 @@
+Since this project is open-source, you are welcome to contribute.
+
+This project uses multiple git branches:
+* feature branches are used to add enhancements to the project. They must
+be named after the issue they're referring (e.g. issue XP-003 is targeted in
+feature branch XP-003). They are later merged into develop when the feature
+is finished.
+* develop branch is the core branch. It is used to group all done features. It
+can occasionally contain hotfixes.
+* release branches are created each time a new release is started. They are
+merged from develop when all planned features are ready. They can also
+contain specific release fixes (e.g. change of configuration, version
+number)
+* master branch is merged from release branches (a tag must be added each
+time a release is pulled)
