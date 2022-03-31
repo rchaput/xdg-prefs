@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines a single Application Item in the AppsPanel.
 """

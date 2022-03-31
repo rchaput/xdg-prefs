@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines Qt Widgets that allow to view the list of applications
 as a Qt List (using a custom widget for the layout).

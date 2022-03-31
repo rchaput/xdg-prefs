@@ -75,11 +75,9 @@ Directly reads the files that compose each of the following databases:
 ## Dependencies
 
 This project only depends on
-* Python3.5 (should work with later versions)
+* Python3.6 (should work with later versions)
 * PySide2 (Qt5 for Python ; tested with version 5.9.0a1)
 * configparser (Python standard library to read config files)
-* [future_fstrings](https://pypi.org/project/future-fstrings/) 
-(in order to use PEP498's F-strings in Python3.5)
 * Uses code from https://github.com/wor/desktop_file_parser
 (in order to parse [Desktop files][apps-spec])
 

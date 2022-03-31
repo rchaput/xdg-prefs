@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines the database that lists associations between
 MIME Types and Applications (represented by Desktop Entries).

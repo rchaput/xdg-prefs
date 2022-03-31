@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines a single AssociationItem in the AssociationsPanel.
 """

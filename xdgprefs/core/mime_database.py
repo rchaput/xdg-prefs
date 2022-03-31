@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module provides functions and classes used to handle the Mime Database
 (i.e. the set of known MIME Types, with associated meta information).
