@@ -28,12 +28,12 @@ Download the Wheel (.whl) file in the [releases] section and install it using
 `pip install XDG_Prefs-<version>-py3-none-any.whl` (replace `<version>` with
 the number of the version you downloaded, such as `0.1`: 
 `XDG_Prefs-0.1-py3-none-any.whl`).
-Please note that you must use Python3.5 or later (you might need to replace
+Please note that you must use Python3.6 or later (you might need to replace
 `pip` with `pip3` on some distributions, such as Debian).
 
 Alternatively, you can clone this project on your computer and run
  `python setup.py install`. This is recommended if you want to contribute.
-Again, you will need to use Python3.5 or later (you might need to replace
+Again, you will need to use Python3.6 or later (you might need to replace
 `python` with `python3` on some distributions, such as Debian).
 
 This will install the required files and create a `xdg-prefs` executable.

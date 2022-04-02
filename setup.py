@@ -11,7 +11,7 @@ setup(
     version='0.1',
 
     packages=['xdgprefs', 'xdgprefs.core', 'xdgprefs.gui'],
-    install_requires=['PySide2', 'future-fstrings'],
+    install_requires=['PySide2'],
 
     entry_points={
         'gui_scripts': [
