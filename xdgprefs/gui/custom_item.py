@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines a custom QListWidgetItem that uses the following layout:
 - icon on the left

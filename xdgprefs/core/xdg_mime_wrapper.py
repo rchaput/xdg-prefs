@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines wrapper functions for the `xdg-mime` software.
 

@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines functions and class to handle the Application Database
 (i.e. the list of Desktop Entries that represent applications).

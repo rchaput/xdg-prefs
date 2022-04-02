@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines the MimeType class as well as a MimeTypeParser (used
 to parse media types from their XML files).

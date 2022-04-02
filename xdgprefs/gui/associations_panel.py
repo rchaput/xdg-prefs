@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This modules defines widgets that allow to view the associations between
 MIME Types and Applications as a Qt List, and to modify the associated

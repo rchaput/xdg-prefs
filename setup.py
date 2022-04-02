@@ -11,7 +11,7 @@ setup(
     version='0.1',
 
     packages=['xdgprefs', 'xdgprefs.core', 'xdgprefs.gui'],
-    install_requires=['PySide2', 'future-fstrings'],
+    install_requires=['PySide2'],
 
     entry_points={
         'gui_scripts': [
@@ -38,7 +38,7 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',
         'Operating System :: Unix',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Utilities'
     ]
 )
