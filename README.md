@@ -24,10 +24,9 @@ tool to manage these preferences ; this software works on every Window Manager
 
 ## Getting started
 
-Download the Wheel (.whl) file in the [releases] section and install it using
-`pip install XDG_Prefs-<version>-py3-none-any.whl` (replace `<version>` with
-the number of the version you downloaded, such as `0.1`: 
-`XDG_Prefs-0.1-py3-none-any.whl`).
+You may install *XDG-Prefs* by using `pip install git+https://github.com/rchaput/xdg-prefs`
+(or `pip install --user git+https://github.com/rchaput/xdg-prefs` if you prefer 
+installing for the current user only).
 Please note that you must use Python3.6 or later (you might need to replace
 `pip` with `pip3` on some distributions, such as Debian).
 
