@@ -75,7 +75,7 @@ Directly reads the files that compose each of the following databases:
 
 This project only depends on
 * Python3.6 (should work with later versions)
-* PySide2 (Qt5 for Python ; tested with version 5.9.0a1)
+* PySide6 (Qt6 for Python)
 * configparser (Python standard library to read config files)
 * Uses code from https://github.com/wor/desktop_file_parser
 (in order to parse [Desktop files][apps-spec])

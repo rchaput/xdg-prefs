@@ -5,7 +5,7 @@ This module defines a single AssociationItem in the AssociationsPanel.
 
 from threading import Thread
 
-from PySide2.QtWidgets import QComboBox
+from PySide6.QtWidgets import QComboBox
 
 from xdgprefs.gui.mime_item import MimeTypeItem
 
