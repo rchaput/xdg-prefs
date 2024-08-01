@@ -4,7 +4,7 @@ as a Qt List (using a custom widget for the layout).
 """
 
 
-from PySide2.QtWidgets import QListWidget, QWidget, QLabel, QGridLayout, \
+from PySide6.QtWidgets import QListWidget, QWidget, QLabel, QGridLayout, \
     QLineEdit, QCheckBox
 
 from xdgprefs.core import MimeType

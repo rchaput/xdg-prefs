@@ -5,7 +5,7 @@ application for each MIME Type.
 """
 
 
-from PySide2.QtWidgets import QListWidget, QWidget, \
+from PySide6.QtWidgets import QListWidget, QWidget, \
     QLabel, QCheckBox, QLineEdit, QGridLayout
 
 from xdgprefs.core import MimeType

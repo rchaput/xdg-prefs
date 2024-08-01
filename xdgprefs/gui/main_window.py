@@ -4,7 +4,7 @@ use the application.
 """
 
 
-from PySide2.QtWidgets import QMainWindow, QTabWidget
+from PySide6.QtWidgets import QMainWindow, QTabWidget
 
 from xdgprefs.gui import MimeTypePanel, AppsPanel, AssociationsPanel
 from xdgprefs.core import MimeDatabase, AppDatabase, AssociationsDatabase

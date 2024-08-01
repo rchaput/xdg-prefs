@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "XDG-Prefs"
+version = "0.3.0"
+description = "A GUI program to view and change your default programs preferences (which program should open which type of file), using the XDG Specifications"
+authors = ["Remy Chaput <rchaput.pro@gmail.com>"]
+license = "Apache"
+readme = "README.md"
+packages = [{include = "xdgprefs"}]
+
+[tool.poetry.dependencies]
+python = "^3.9, <3.13"
+PySide6 = "^6.7"
+
+
+[build-system]
+requires = [
+  "setuptools >= 40.9.0",
+]
+build-backend = "setuptools.build_meta"
