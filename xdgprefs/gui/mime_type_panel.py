@@ -1,11 +1,10 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines Qt Widgets that allow to view the list of MIME Types
 as a Qt List (using a custom widget for the layout).
 """
 
 
-from PySide2.QtWidgets import QListWidget, QWidget, QLabel, QGridLayout, \
+from PySide6.QtWidgets import QListWidget, QWidget, QLabel, QGridLayout, \
     QLineEdit, QCheckBox
 
 from xdgprefs.core import MimeType

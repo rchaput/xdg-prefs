@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This modules defines widgets that allow to view the associations between
 MIME Types and Applications as a Qt List, and to modify the associated
@@ -6,7 +5,7 @@ application for each MIME Type.
 """
 
 
-from PySide2.QtWidgets import QListWidget, QWidget, \
+from PySide6.QtWidgets import QListWidget, QWidget, \
     QLabel, QCheckBox, QLineEdit, QGridLayout
 
 from xdgprefs.core import MimeType

@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines the database that lists associations between
 MIME Types and Applications (represented by Desktop Entries).
@@ -21,6 +20,7 @@ from xdgprefs.core import os_env
 ADDED = 'Added Applications'
 REMOVED = 'Removed Applications'
 DEFAULT = 'Default Applications'
+CACHE = 'MIME Cache'
 
 
 class Associations(object):
@@ -118,7 +118,8 @@ class ArrayInterpolation(configparser.Interpolation):
 
 def parse_mimeapps(file_path):
     config = configparser.ConfigParser(delimiters='=',
-                                       interpolation=ArrayInterpolation())
+                                       interpolation=ArrayInterpolation(),
+                                       strict=False)
     try:
         config.read(file_path)
         for section in [ADDED, REMOVED, DEFAULT]:
@@ -154,19 +155,22 @@ class AssociationsDatabase(object):
         if config is None:
             self.logger.warning(f'Badly formatted file: {path}')
             return
-        section = config['Added Applications']
+        section = config[ADDED]
         for mimetype, apps in section.items():
             self.associations[mimetype].extend_added(apps)
-        section = config['Removed Applications']
+        section = config[REMOVED]
         for mimetype, apps in section.items():
             self.associations[mimetype].extend_removed(apps)
-        section = config['Default Applications']
+        section = config[DEFAULT]
         for mimetype, apps in section.items():
             self.associations[mimetype].extend_default(apps)
 
     def _parse_cache_file(self, path):
         config = parse_mimeapps(path)
-        for mimetype, apps in config['MIME Cache'].items():
+        if config is None:
+            self.logger.warning(f'Badly formatted file: {path}')
+            return
+        for mimetype, apps in config[CACHE].items():
             assoc = self.associations[mimetype]
             assoc.extend_default(apps)
 

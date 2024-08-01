@@ -4,7 +4,7 @@ Entry-point of the xdg-prefs software.
 
 
 import sys
-from PySide2.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 
 from xdgprefs.gui.main_window import MainWindow
 

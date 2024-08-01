@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 This module defines a custom QListWidgetItem that uses the following layout:
 - icon on the left
@@ -9,10 +8,10 @@ This QListWidgetItem is used to show both MimeTypes and App.
 """
 
 
-from PySide2.QtWidgets import QListWidgetItem, QWidget, \
+from PySide6.QtWidgets import QListWidgetItem, QWidget, \
     QVBoxLayout, QHBoxLayout, QLabel
-from PySide2.QtGui import QPixmap
-from PySide2.QtCore import QSize
+from PySide6.QtGui import QPixmap
+from PySide6.QtCore import QSize
 
 
 class CustomItem(QListWidgetItem):

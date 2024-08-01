@@ -24,16 +24,15 @@ tool to manage these preferences ; this software works on every Window Manager
 
 ## Getting started
 
-Download the Wheel (.whl) file in the [releases] section and install it using
-`pip install XDG_Prefs-<version>-py3-none-any.whl` (replace `<version>` with
-the number of the version you downloaded, such as `0.1`: 
-`XDG_Prefs-0.1-py3-none-any.whl`).
-Please note that you must use Python3.5 or later (you might need to replace
+You may install *XDG-Prefs* by using `pip install git+https://github.com/rchaput/xdg-prefs`
+(or `pip install --user git+https://github.com/rchaput/xdg-prefs` if you prefer 
+installing for the current user only).
+Please note that you must use Python3.6 or later (you might need to replace
 `pip` with `pip3` on some distributions, such as Debian).
 
 Alternatively, you can clone this project on your computer and run
  `python setup.py install`. This is recommended if you want to contribute.
-Again, you will need to use Python3.5 or later (you might need to replace
+Again, you will need to use Python3.6 or later (you might need to replace
 `python` with `python3` on some distributions, such as Debian).
 
 This will install the required files and create a `xdg-prefs` executable.
@@ -75,11 +74,9 @@ Directly reads the files that compose each of the following databases:
 ## Dependencies
 
 This project only depends on
-* Python3.5 (should work with later versions)
-* PySide2 (Qt5 for Python ; tested with version 5.9.0a1)
+* Python3.6 (should work with later versions)
+* PySide6 (Qt6 for Python)
 * configparser (Python standard library to read config files)
-* [future_fstrings](https://pypi.org/project/future-fstrings/) 
-(in order to use PEP498's F-strings in Python3.5)
 * Uses code from https://github.com/wor/desktop_file_parser
 (in order to parse [Desktop files][apps-spec])
 
