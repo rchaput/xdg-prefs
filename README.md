@@ -24,18 +24,30 @@ tool to manage these preferences ; this software works on every Window Manager
 
 ## Getting started
 
+Follow these instructions to install the required files and create a `xdg-prefs` executable.
+
+(Note: you might need to replace `pip` with `pip3` on some distributions, such as Debian).
+
+### For Python 3.9+ and Qt6:
+
 You may install *XDG-Prefs* by using `pip install git+https://github.com/rchaput/xdg-prefs`
 (or `pip install --user git+https://github.com/rchaput/xdg-prefs` if you prefer 
 installing for the current user only).
-Please note that you must use Python3.6 or later (you might need to replace
-`pip` with `pip3` on some distributions, such as Debian).
+
+If you are unsure about your Qt version, try this latest release first.
+
+### :warning: For Python versions earlier than 3.9, or Qt5:
+
+You need to use the older **v0.2** of *XDG-Prefs* that relies on dependencies still
+compatible with such versions of Python and Qt, by using 
+`pip install git+https://github.com/rchaput/xdg-prefs.git@v0.2`.
+
+### Development-ready
 
 Alternatively, you can clone this project on your computer and run
  `python setup.py install`. This is recommended if you want to contribute.
-Again, you will need to use Python3.6 or later (you might need to replace
+Again, you will need to use Python3.9 or later (you might need to replace
 `python` with `python3` on some distributions, such as Debian).
-
-This will install the required files and create a `xdg-prefs` executable.
 
 ## How to use
 
@@ -74,7 +86,7 @@ Directly reads the files that compose each of the following databases:
 ## Dependencies
 
 This project only depends on
-* Python3.6 (should work with later versions)
+* Python3.9 (should work with later versions)
 * PySide6 (Qt6 for Python)
 * configparser (Python standard library to read config files)
 * Uses code from https://github.com/wor/desktop_file_parser
