@@ -43,7 +43,7 @@ def _try_path(path):
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE,
                              universal_newlines=True)
-        if res.returncode is not 0:
+        if res.returncode != 0:
             logger.warning(f'Unknown error for path {path} ({res.returncode}):'
                            f' {res.stderr}')
             return False
@@ -77,7 +77,7 @@ def get_default_app(mime_type):
     res = subprocess.run([bin_path, 'query', 'default', mime_type],
                          capture_output=True,
                          text=True)
-    if res.returncode is not 0:
+    if res.returncode != 0:
         logger.warning(f'Unknown error while querying default application'
                        f' ({res.returncode}): {res.stderr}')
         return None
@@ -104,7 +104,7 @@ def set_default_app(mime_type, app):
     res = subprocess.run([bin_path, 'default', app, mime_type],
                          capture_output=True,
                          text=True)
-    if res.returncode is not 0:
+    if res.returncode != 0:
         logger.error(f'Unknown error while setting default application'
                      f' ({res.returncode}): {res.stderr}')
-    return res.returncode is 0
+    return res.returncode == 0
