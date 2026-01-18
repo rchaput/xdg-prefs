@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='XDG-Prefs',
-    version='0.3',
+    version='0.3.1',
 
     packages=['xdgprefs', 'xdgprefs.core', 'xdgprefs.gui'],
     install_requires=['PySide6'],

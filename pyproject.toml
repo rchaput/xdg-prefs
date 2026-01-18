@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "XDG-Prefs"
-version = "0.3.0"
+version = "0.3.1"
 description = "A GUI program to view and change your default programs preferences (which program should open which type of file), using the XDG Specifications"
 authors = ["Remy Chaput <rchaput.pro@gmail.com>"]
 license = "Apache"
