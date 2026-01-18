@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name='XDG-Prefs',
-    version='0.3',
+    version='0.3.1',
 
     packages=['xdgprefs', 'xdgprefs.core', 'xdgprefs.gui'],
     install_requires=['PySide6'],
@@ -39,6 +39,11 @@ setup(
         'Natural Language :: English',
         'Operating System :: Unix',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Programming Language :: Python :: 3.14',
         'Topic :: Utilities'
     ]
 )
