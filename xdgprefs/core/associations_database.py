@@ -117,7 +117,7 @@ class ArrayInterpolation(configparser.Interpolation):
 
 
 def parse_mimeapps(file_path):
-    config = configparser.ConfigParser(delimiters='=',
+    config = configparser.RawConfigParser(delimiters='=',
                                        interpolation=ArrayInterpolation(),
                                        strict=False)
     try:
