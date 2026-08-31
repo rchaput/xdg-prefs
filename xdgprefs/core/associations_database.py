@@ -117,7 +117,7 @@ class ArrayInterpolation(configparser.Interpolation):
 
 
 def parse_mimeapps(file_path):
-    config = configparser.ConfigParser(delimiters='=',
+    config = configparser.RawConfigParser(delimiters='=',
                                        interpolation=ArrayInterpolation(),
                                        strict=False)
     try:
@@ -186,6 +186,7 @@ class AssociationsDatabase(object):
         if app in apps:
             apps.remove(app)
         apps.insert(0, app)
+        self.config.set(DEFAULT, mimetype, apps)
         return self.save_config()
 
     def save_config(self):
